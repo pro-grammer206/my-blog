@@ -33,7 +33,7 @@ export async function getStaticProps({ params }) {
     props: {
       spost: data.items.find((item) => item.fields.slug === params.slug),
     },
-    revalidate: 30,
+    revalidate: 10,
   };
 }
 
