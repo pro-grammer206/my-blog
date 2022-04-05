@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 
-import github from "../public/images/github.svg";
+import github from "../public/github.svg";
 
 const about = () => {
   return (
@@ -64,6 +64,11 @@ const about = () => {
         <div>
           <p>Headless CMS used</p>
           <li>Contentful</li>
+        </div>
+        <div>
+          <p>React animation libraries used</p>
+          <li>Spring</li>
+          <li>Framer motion</li>
         </div>
       </section>
       <style jsx>{`

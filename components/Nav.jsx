@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useState } from "react";
-import github from "../public/images/github.svg";
+import github from "../public/github.svg";
 import Image from "next/image";
 
 const Nav = ({ show, setShow }) => {

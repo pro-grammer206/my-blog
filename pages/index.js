@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import Card from "../components/Card";
 import { createClient } from "contentful";
 import Link from "next/link";
+import moment from "moment";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -12,26 +13,35 @@ export async function getStaticProps() {
   });
 
   const info = await client.getEntries();
-  const blog = info.items.filter(
-    (items) => items.sys.contentType.sys.id === "blog"
-  );
   return {
-    props: { details: blog },
+    props: {
+      details: info.items.filter(
+        (items) => items.sys.contentType.sys.id === "blog"
+      ),
+    },
   };
 }
 
 export default function Home({ details }) {
+  console.log(details.map((d) => d.fields.slug));
   return (
     <Layout>
       <h3>My Articles</h3>
       <div className="posts">
-        {details.map((d) => (
-          <Link key={d.fields.postId} href={`/posts/${d.fields.slug}`}>
-            <a>
-              <Card title={d.fields.postTitle} />
-            </a>
-          </Link>
-        ))}
+        {details ? (
+          details.map((d) => (
+            <Link key={d.fields.postId} href={`/posts/${d.fields.slug}`}>
+              <a>
+                <Card
+                  title={d.fields.postTitle}
+                  time={moment(d.fields.createdAt).fromNow()}
+                />
+              </a>
+            </Link>
+          ))
+        ) : (
+          <p>loading</p>
+        )}
         <a
           href="https://github.com/pro-grammer206"
           target="_blank"
