@@ -19,6 +19,7 @@ export async function getStaticProps() {
         (items) => items.sys.contentType.sys.id === "blog"
       ),
     },
+    revalidate: 30,
   };
 }
 
