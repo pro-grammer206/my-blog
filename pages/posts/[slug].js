@@ -5,6 +5,7 @@ import moment from "moment";
 import Link from "next/link";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const client = createClient({
   accessToken: process.env.API_KEY,
@@ -41,10 +42,12 @@ export async function getStaticProps({ params }) {
 function Article({ spost }) {
   const [vpost, setVpost] = useState({});
   const [pcontent, setPContent] = useState("");
+  const [image, setImage] = useState("");
   useEffect(() => {
     if (spost) {
       setVpost(spost.fields);
       setPContent(documentToHtmlString(vpost.content));
+      setImage(spost.fields.image.fields.file.url);
     }
   }, []);
 
@@ -53,6 +56,9 @@ function Article({ spost }) {
       <Head>
         <title>{vpost ? vpost.postTitle : ""}</title>
       </Head>
+      {image ? (
+        <Image src={"https://" + image} width={650} height={500} />
+      ) : null}
       <div className="post">
         <h2>{vpost.postTitle}</h2>
         <p>{moment(vpost.createdAt).fromNow()}</p>
