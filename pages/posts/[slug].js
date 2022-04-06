@@ -47,7 +47,8 @@ function Article({ spost }) {
     if (spost) {
       setVpost(spost.fields);
       setPContent(documentToHtmlString(vpost.content));
-      setImage(spost.fields.image.fields.file.url);
+      if (spost.fields.image) setImage(spost.fields.image.fields.file.url);
+      else setImage("");
     }
   }, []);
 
