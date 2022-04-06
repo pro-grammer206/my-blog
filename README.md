@@ -15,4 +15,4 @@
 1. useState
 2. useEffect
 
-## [Hosted on vercel](https://my-blog-beta-one.vercel.app/posts/about-sadguru)
+## [Hosted on vercel](https://my-blog-beta-one.vercel.app)
