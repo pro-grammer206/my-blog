@@ -24,9 +24,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({ details }) {
-  console.log(details.map((d) => d.fields.slug));
   return (
     <Layout>
+      <Head>
+        <title>Home Page</title>
+      </Head>
       <h3>My Articles</h3>
       <div className="posts">
         {details ? (

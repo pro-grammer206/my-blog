@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <p>Copyright &copy; {new Date().getFullYear()}</p>
+      <p>Created by Vipin with NextJS{new Date().getFullYear()}</p>
     </footer>
   );
 };

@@ -1,9 +1,10 @@
-import React from "react";
 import { createClient } from "contentful";
 import Layout from "../../components/Layout";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import moment from "moment";
 import Link from "next/link";
+import Head from "next/head";
+import { useEffect, useState } from "react";
 
 const client = createClient({
   accessToken: process.env.API_KEY,
@@ -38,16 +39,28 @@ export async function getStaticProps({ params }) {
 }
 
 function article({ spost }) {
-  const { postTitle, createdAt, content } = spost.fields;
-  const tpost = moment(createdAt).fromNow();
-  const tobeRendered = documentToHtmlString(content);
+  const [vpost, setVpost] = useState({});
+  const [pcontent, setPContent] = useState("");
+  useEffect(() => {
+    if (spost) {
+      setVpost(spost.fields);
+      setPContent(documentToHtmlString(vpost.content));
+    }
+  }, []);
 
   return (
     <Layout>
+      <Head>
+        <title>{vpost ? vpost.postTitle : ""}</title>
+      </Head>
       <div className="post">
-        <h2>{postTitle}</h2>
-        <p>Posted {tpost}</p>
-        <div dangerouslySetInnerHTML={{ __html: tobeRendered }} />
+        <h2>{vpost.postTitle}</h2>
+        <p>{moment(vpost.createdAt).fromNow()}</p>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: documentToHtmlString(vpost.content),
+          }}
+        />
       </div>
       <Link href="/">
         <a>All Posts</a>
