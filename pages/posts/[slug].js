@@ -38,7 +38,7 @@ export async function getStaticProps({ params }) {
   };
 }
 
-function article({ spost }) {
+function Article({ spost }) {
   const [vpost, setVpost] = useState({});
   const [pcontent, setPContent] = useState("");
   useEffect(() => {
@@ -68,4 +68,4 @@ function article({ spost }) {
     </Layout>
   );
 }
-export default article;
+export default Article;
