@@ -57,9 +57,7 @@ function Article({ spost }) {
       <Head>
         <title>{vpost ? vpost.postTitle : ""}</title>
       </Head>
-      {image ? (
-        <Image src={"https://" + image} width={650} height={500} />
-      ) : null}
+      {image ? <Image src={"https:" + image} width={650} height={500} /> : null}
       <div className="post">
         <h2>{vpost.postTitle}</h2>
         <p>{moment(vpost.createdAt).fromNow()}</p>
